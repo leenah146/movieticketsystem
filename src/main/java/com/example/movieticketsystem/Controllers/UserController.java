@@ -4,6 +4,7 @@ import com.example.movieticketsystem.Services.UserService;
 import com.example.movieticketsystem.dto.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -16,9 +17,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user")
-    public ResponseEntity GetUsers(){
-        List<User> User = userService.getCustomersrepositery();
-        return  ResponseEntity.status(201).body(User);
+    public ResponseEntity GetUsers(@AuthenticationPrincipal User user){;
+        return  ResponseEntity.status(201).body(userService.GetUser(user));
+    }
+    @GetMapping("/userad")
+    public ResponseEntity GetUsersAdmin(){;
+        return  ResponseEntity.status(201).body(userService.GetUserAdmin());
     }
 
     @PostMapping("/register")
@@ -32,7 +36,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity UpdateUser(@RequestBody @Valid User user, @PathVariable Integer id){
+    public ResponseEntity UpdateUser(@RequestBody @Valid  User user, @PathVariable Integer id){
         userService.updateCustomer(user, id);
         return  ResponseEntity.status(201).body(new ApiResponse("User updated!",201));
     }
@@ -40,7 +44,7 @@ public class UserController {
 
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity deleteCustomer(@PathVariable Integer id){
+    public ResponseEntity deleteCustomer(@PathVariable  Integer id,@AuthenticationPrincipal User user){
         userService.deleteuser(id);
         return  ResponseEntity.status(201).body(new ApiResponse("User deleted!",201));
     }

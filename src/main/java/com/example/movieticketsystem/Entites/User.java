@@ -22,7 +22,7 @@ public class User implements UserDetails {
     private String username;
     @NotEmpty(message = "email cannot be empty")
     @Email
-    @Column(columnDefinition = "varchar(20) unique not null")
+    @Column(unique = true)
     private String email;
     @NotEmpty(message = "password cannot be empty")
     private String password;

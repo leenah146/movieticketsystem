@@ -6,8 +6,6 @@ import com.example.movieticketsystem.Exceptions.ApiException;
 import com.example.movieticketsystem.Repositeries.MovieRepositry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -27,7 +25,9 @@ public class MovieService {
         Movie oldmovie =movieRepositry.getById(id);
         oldmovie.setMoviename(movie.getMoviename());
         oldmovie.setAge(movie.getAge());
-        oldmovie.setSummery(movie.getSummery());
+        oldmovie.setSummary(movie.getSummary());
+        oldmovie.setGenre(movie.getGenre());
+        oldmovie.setDuration(movie.getDuration());
         oldmovie.setDay(movie.getDay());
         oldmovie.setLocations(movie.getLocations());
         oldmovie.setTime(movie.getTime());
@@ -59,10 +59,7 @@ public class MovieService {
     public List<Movie> getmoviebyday(Day day){
         return movieRepositry.findAllByDay(day);
     }
-    public List<Movie> getmoviebylocaltime(){
-        LocalTime time=LocalTime.now();
-        return movieRepositry.findAllByTime(time);
-    }
+
     public List<Movie> getmoviebygenre(String genre){
        List<Movie> movie =movieRepositry.findAllByGenre(genre);
         if(movie==null){

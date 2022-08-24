@@ -14,8 +14,11 @@ public class UserService {
     private final UserRepositry userRepositry;
 
 
-    public List<User> getCustomersrepositery() {
-        return userRepositry.findAll();
+    public User GetUser(User user) {
+        return userRepositry.getById(user.getId());
+    }
+    public List<User> GetUserAdmin(){
+       return userRepositry.findAll();
     }
 
     public void register(User user) {

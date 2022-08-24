@@ -15,12 +15,14 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(columnDefinition = "varchar(20) unique")
+    @Column(unique = true)
     private String moviename;
     @NotNull(message = "age cannot be empty")
     private Integer age;
-    private String summery;
+    private String summary;
+    @NotEmpty(message = "Time must be determined")
     private String genre;
+    private String duration;
     @NotNull(message = "Days must be determined")
     @Enumerated(EnumType.STRING)
     private Day day;

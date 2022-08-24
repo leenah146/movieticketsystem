@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +18,6 @@ public class Meal {
     @NotEmpty(message ="meal must be added it")
     @Column(unique = true)
     private String meal;
-    @NotEmpty(message ="meal price must be added it")
+    @NotNull(message ="meal price must be added it")
     private Integer mealprice;
 }
